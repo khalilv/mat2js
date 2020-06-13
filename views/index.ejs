@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <title>mat2js</title>
+    <style>
+        body {
+            background-color: #565656;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Hello my name is <%= title %></h3>
+    <a href="/users"><button>Click me to go to another page</button></a>
+    <br />
+    <br />
+    <button onclick="send_request()">Click me to make an HTTP request</button>
+    <br />
+    <br />
+    <textarea id="http_response" placeholder="Response"></textarea>
+
+    <script>
+        function send_request() {
+            let request = new XMLHttpRequest();
+            request.open("GET", "/sample", true);
+            request.responseType = "json";
+            request.onload = function () {
+                if (request.response.success) {
+                    document.getElementById("http_response").innerHTML = request.response.body;
+                } else {
+                    document.getElementById("http_response").innerHTML = request.response;
+                }
+            }
+            request.send();
+        }
+
+
+
+    </script>
+</body>
+
+</html>
