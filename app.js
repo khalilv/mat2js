@@ -20,13 +20,11 @@ app.get('/users', function (req, res, next) {
 
 /* sample HTTP call */
 app.get('/sample', function (req, res, next) {
-    console.log(functions.test()); 
     res.json({success : true, body : "HTTP request successful"}); 
 });
 
 app.post('/convert', function (req, res, next){
-	console.log(req.body)
-    let result = functions.assignment(req.body); //call function here; 
+    let result = functions.process(req.body); //call function here; 
     res.json({success : true, body : result});  
 })
 
