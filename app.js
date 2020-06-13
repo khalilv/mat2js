@@ -25,7 +25,8 @@ app.get('/sample', function (req, res, next) {
 });
 
 app.post('/convert', function (req, res, next){
-    let result = 'js'; //call function here; 
+	console.log(req.body)
+    let result = functions.assignment(req.body); //call function here; 
     res.json({success : true, body : result});  
 })
 
