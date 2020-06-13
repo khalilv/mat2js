@@ -25,8 +25,8 @@ app.get('/sample', function (req, res, next) {
 });
 
 app.post('/convert', function (req, res, next){
-    console.log(req.body); 
+    let result = 'js'; //call function here; 
+    res.json({success : true, body : result});  
 })
-
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))

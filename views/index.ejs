@@ -46,15 +46,18 @@
         function process() {
             let raw_matlab = document.getElementById("matlab_input");
             let matlab_array = raw_matlab.value.split('\n').map(x => x.trim());
-            console.log(matlab_array);
+            let js_output = document.getElementById("js_output"); 
             let request = new XMLHttpRequest();
             request.open("POST", "/convert" , true);
             request.setRequestHeader( "Content-Type", "application/json" );
+            request.responseType = "json";
+            request.onloadend = function(){ 
+                if(request.response.success){
+                    js_output.value = request.response.body; 
+                }
+            }
             request.send(JSON.stringify(matlab_array));
         }
-
-
-
     </script>
 </body>
 
