@@ -9,32 +9,48 @@
         body {
             background-color: #565656;
         }
+
+        .io {
+            background-color: lightgray;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 
 <body>
-    <h3>Hello my name is <%= title %></h3>
-    <a href="/users"><button>Click me to go to another page</button></a>
-    <br />
-    <br />
-    <button onclick="send_request()">Click me to make an HTTP request</button>
-    <br />
-    <br />
-    <textarea id="http_response" placeholder="Response"></textarea>
+    <h1>mat2js</h1>
+
+    <div class='row'>
+        <div class="col" style="text-align: center;">
+            <textarea id="matlab_input" class="io" placeholder="Input Matlab" rows="30" cols="100"></textarea>
+            <textarea id="matlab_tests" placeholder="Matlab tests" rows="30" cols="100"></textarea>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="col" style="text-align: center;">
+            <button onclick="process()" style="margin: 10px;">Convert</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="col" style="text-align: center;">
+            <textarea id="js_output" class="io" placeholder="Output JS" rows="30" cols="100"></textarea>
+            <textarea id="js_results" placeholder="JS results" rows="30" cols="100"></textarea>
+        </div>
+    </div>
+
+
 
     <script>
-        function send_request() {
+        function process() {
+            let raw_matlab = document.getElementById("matlab_input");
+            let matlab_array = raw_matlab.value.split('\n').map(x => x.trim());
+            console.log(matlab_array);
             let request = new XMLHttpRequest();
-            request.open("GET", "/sample", true);
-            request.responseType = "json";
-            request.onload = function () {
-                if (request.response.success) {
-                    document.getElementById("http_response").innerHTML = request.response.body;
-                } else {
-                    document.getElementById("http_response").innerHTML = request.response;
-                }
-            }
-            request.send();
+            request.open("POST", "/convert" , true);
+            request.setRequestHeader( "Content-Type", "application/json" );
+            request.send(JSON.stringify(matlab_array));
         }
 
 

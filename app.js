@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 var functions = require('./functions');
+var bodyParser = require('body-parser');
+
+
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /* GET home page. */
 app.get('/', function (req, res, next) {
@@ -18,6 +23,10 @@ app.get('/sample', function (req, res, next) {
     console.log(functions.test()); 
     res.json({success : true, body : "HTTP request successful"}); 
 });
+
+app.post('/convert', function (req, res, next){
+    console.log(req.body); 
+})
 
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
