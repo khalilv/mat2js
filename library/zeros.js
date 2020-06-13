@@ -1,7 +1,18 @@
 module.exports = {
 
     process: function (params_str) {
-        console.log(get_type(params_str));
+        let type = get_type(params_str);
+        switch(type){
+            case 0:
+                return "function zeros(x){array = [];for (i = 0; i < x;i++){subarr = [];\nfor(j = 0;j<x;j++){subarr.push(0)}array.push(subarr);return array;}"
+                break;
+            case 1:
+                return "function zeros(x,y){array = [];for (i = 0; i < x;i++){subarr = [];for(j = 0;j<y;j++){subarr.push(0)}array.push(subarr);return array;}"
+                break;
+            case 2:
+                return "function zeros(x,y){array = [];for (i = 0; i < x;i++){subarr = [];for(j = 0;j<y;j++){subarr.push(0)}array.push(subarr);return array;}"
+                break;
+        }
     }
 
 };

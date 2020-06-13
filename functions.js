@@ -2,10 +2,11 @@ var zeros_class = require('./library/zeros.js');
 
 module.exports = {
     process: function (data) {
+    	result = []
         for (let i = 0; i < data.length; i++) {
-            process_line(data[i]); 
+            result.push(process_line(data[i]));
         }
-        return 5; 
+        return result; 
     }
 };
 
@@ -14,7 +15,7 @@ function process_line(line){
     let param_str = line.slice(line.indexOf("(") + 1, line.lastIndexOf(")")); 
     switch (func_name) {
         case 'zeros':
-            zeros_class.process(param_str); 
+            return zeros_class.process(param_str); 
             break; 
     }
 }
