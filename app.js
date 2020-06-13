@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
-
+var functions = require('./functions');
 
 /* GET home page. */
 app.get('/', function (req, res, next) {
@@ -15,6 +15,7 @@ app.get('/users', function (req, res, next) {
 
 /* sample HTTP call */
 app.get('/sample', function (req, res, next) {
+    console.log(functions.test()); 
     res.json({success : true, body : "HTTP request successful"}); 
 });
 
